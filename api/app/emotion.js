@@ -1,21 +1,21 @@
 require('dotenv').config();
-var apiKey = process.env.EMOTION_API_KEY;
-var apiUrl = process.env.EMOTION_API_URL;
-var request = require('request');
-
-var headers = {
-    'Content-Type':'application/json',
+const apiKey = process.env.EMOTION_API_KEY;
+const apiUrl = process.env.EMOTION_API_URL;
+const request = require('request');
+const headers = {
+    'Content-Type':'application/octet-stream',
     'Ocp-Apim-Subscription-Key' : apiKey
 };
 
 
-var getEmotion = function(imgUrl) {
-    var options = {
+let getEmotion = function(imgData) {
+    let options = {
         url: apiUrl,
         method: 'POST',
         headers: headers,
-        body: '{ "url" : "' + imgUrl +'"}'
+        body: imgData
     };
+
 
     return new Promise(function (resolve, reject) {
         request(options, function (error, response, body) {
@@ -23,6 +23,5 @@ var getEmotion = function(imgUrl) {
         });
     });
 };
-
 
 exports.getEmotion = getEmotion;
