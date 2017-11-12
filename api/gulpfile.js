@@ -27,6 +27,6 @@ gulp.task('reload', function() {
 
 gulp.task('watch', ['server'], function(){
     livereload.listen();
-    gulp.watch(['js/*.js', 'app.js', 'routes/*'], ['server']);
+    gulp.watch(['js/*.js', 'app.js', 'routes/*', 'app/*.js'], ['server']);
     gulp.watch(['public/*/*', 'views/*'], ['reload']);
 })
