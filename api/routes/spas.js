@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var spa = require('../app/spa');
 
-router.get('/', function(req, res, next) {
-    var param = {"value":"This is sample message."};
-    res.header('Content-Type', 'application/json; charset=utf-8')
-    res.send(param);
+router.get('/', function(req, res) {
+    spa.getSpa().then(function (value) {
+        res.header('Content-Type', 'application/xml; charset=utf-8');
+        res.send(value);
+    });
 });
 
 module.exports = router;

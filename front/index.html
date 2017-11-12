@@ -1,8 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+	<meta charset="utf-8">
+	<title>カメラ起動</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
-<body></body>
+<body>
+	<main class="container">
+		<section>
+			<h1 class="text-center">はつしの気持ち</h1>
+			<div class="text-center mt-5">
+				<canvas id="mycanvas" class="mx-auto">Canvasに対応しているブラウザを使用して下さい。</canvas>
+			</div>
+			<p class="text-center p-3"><button type="button" id="js-rotate-btn" class="btn btn-outline-primary">90度画像を回転する</button></p>
+			<form>
+				<div class="form-group text-center">
+					<input type="file" accept="image/*" capture="camera" id="exampleFormControlFile1" class="form-control-file mx-auto js-file-image">
+				</div>
+				<p class="text-center p-3 mt-4"><button type="button" id="js-submit-btn" class="btn btn-primary py-2 px-5">送信</button></p>
+			</form>
+		</section>
+		<section class="result-section mt-5">
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">エリア</th>
+					<th scope="col">名前</th>
+					<th scope="col">URL</th>
+					<th scope="col">住所</th>
+				</tr>
+				</thead>
+				<tbody class="js-table">
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="./js/app.js"></script>
+</body>
 </html>
