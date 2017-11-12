@@ -3,8 +3,9 @@ var router = express.Router();
 var spa = require('../app/spa');
 
 router.get('/', function(req, res) {
-    spa.getSpa().then(function (value) {
-        res.header('Content-Type', 'application/xml; charset=utf-8');
+    var emotion = 'happiness';
+    spa.getSpa(emotion).then(function (value) {
+        res.header('Content-Type', 'application/json; charset=utf-8');
         res.send(value);
     });
 });
