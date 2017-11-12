@@ -17,6 +17,13 @@ router.post('/', upload.single('file'), function(req, res, next) {
         emotion.getEmotion(data).then(function (value) {
             res.send(value);
             fs.unlinkSync(req.file.path);
+            //TODO 温泉検索APIとの繋ぎ込みを行う
+            /*
+            spa.getSpa(emotion).then(function (value) {
+                res.header('Content-Type', 'application/json; charset=utf-8');
+                res.send(value);
+            });
+            */
         });
     });
 });
