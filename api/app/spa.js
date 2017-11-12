@@ -12,7 +12,7 @@ const getSpa = function(emotion) {
     var options = {};
 
     l_area = getAreaCode(emotion);
-    query = { key: apiKey, l_area: l_area, count: '5', xml_ptn: '1' };
+    query = { key: apiKey, l_area: l_area, count: '5', xml_ptn: '0' };
     url = apiUrl + '?' + qs.stringify(query);
     options = {
         url: url,
@@ -22,6 +22,7 @@ const getSpa = function(emotion) {
     return new Promise(function (resolve, reject) {
         request(options, function (error, response, body) {
             parseString(body, function (err, result) {
+
                 resolve(result);
             });
 
