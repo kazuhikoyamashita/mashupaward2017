@@ -8,6 +8,29 @@ const headers = {
 };
 
 
+
+
+let check = function(obj) {
+    let strongEmotion = "";
+    let score = 0;
+
+    let d = obj[0].scores;
+
+
+    Object.keys(d).forEach(function(key) {
+
+        let value = d[key];
+        
+        if (value > score) {
+            score = value;
+            strongEmotion = key;
+        }
+    });
+
+    return strongEmotion;
+};
+
+
 let getEmotion = function(imgData) {
     let options = {
         url: apiUrl,
@@ -19,7 +42,7 @@ let getEmotion = function(imgData) {
 
     return new Promise(function (resolve, reject) {
         request(options, function (error, response, body) {
-            resolve(body);
+            resolve(check(JSON.parse(body)));
         });
     });
 };
