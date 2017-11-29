@@ -9,35 +9,37 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-	<main class="container">
+	<main class="container py-5">
 		<section>
 			<h1 class="text-center">はつしの気持ち</h1>
 			<div class="text-center mt-5">
 				<canvas id="mycanvas" class="mx-auto">Canvasに対応しているブラウザを使用して下さい。</canvas>
 			</div>
 			<p class="text-center p-3"><button type="button" id="js-rotate-btn" class="btn btn-outline-primary">90度画像を回転する</button></p>
-			<form>
+			<form name="file" id="data">
 				<div class="form-group text-center">
-					<input type="file" accept="image/*" capture="camera" id="exampleFormControlFile1" class="form-control-file mx-auto js-file-image">
+					<input type="file" name="file" accept="image/*" capture="camera" id="exampleFormControlFile1" class="form-control-file mx-auto js-file-image">
 				</div>
 				<p class="text-center p-3 mt-4"><button type="button" id="js-submit-btn" class="btn btn-primary py-2 px-5">送信</button></p>
+				<input type="hidden" name="lang" value="35.710277">
+				<input type="hidden" name="lat" value="139.777208">
 			</form>
 		</section>
-		<section class="result-section mt-5">
+		<div class="result-section mt-5">
 			<table class="table">
 				<thead>
 				<tr>
-					<th scope="col">エリア</th>
-					<th scope="col">名前</th>
-					<th scope="col">URL</th>
+					<th scope="col">温泉名</th>
 					<th scope="col">住所</th>
+					<th scope="col">特徴</th>
 				</tr>
 				</thead>
 				<tbody class="js-table">
 				</tbody>
 			</table>
-		</section>
+		</div>
 	</main>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="./js/app.js"></script>
 </body>

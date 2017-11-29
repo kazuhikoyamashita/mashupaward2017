@@ -1,5 +1,4 @@
 (function() {
-	console.log(axios);
 	let canvas = document.getElementById('mycanvas');
 	let ctx = canvas.getContext('2d');
 	let roadBinaryData;
@@ -139,52 +138,137 @@
 		wh.innerHTML = 'width:' + w + ' height:' + h;
 	}
 	function postFile() {
-		axios.post('', {
-			fileBinaryData: roadBinaryData,
-			longitude: '35.710277',
-			latitude: '139.777208'
-		})
+		var formData = new FormData(document.getElementById('data'));
+
+
+
+		//$.ajax('https://hatsushinokimochi-api.herokuapp.com/',
+		//	{
+		//		type: 'post',
+		//		data: formData,
+		//	}
+		//)
+		//	.done(function(data) {
+		//
+		//	})
+		//	.fail(function() {
+		//	});
+
+
+
+
+
+		axios.post('https://hatsushinokimochi-api.herokuapp.com/', formData)
 			.then(function (response) {
-				let data = [
-					{
-						area: '東京',
-						name: '◯◯温泉',
-						url: 'https://liginc.co.jp/',
-						address: '東京都千代田区'
-					},
-					{
-						area: '東京',
-						name: '✕✕温泉',
-						url: 'https://liginc.co.jp/',
-						address: '東京都千代田区'
-					},
-					{
-						area: '東京',
-						name: '□□温泉',
-						url: 'https://liginc.co.jp/',
-						address: '東京都千代田区'
-					},
-					{
-						area: '東京',
-						name: '△△温泉',
-						url: 'https://liginc.co.jp/',
-						address: '東京都千代田区'
-					}
-				];
+				//let data = {
+				//	"Results": {
+				//		"$": {"xmlns": "jws"},
+				//		"NumberOfResults": ["8"],
+				//		"DisplayPerPage": ["5"],
+				//		"DisplayFrom": ["1"],
+				//		"APIVersion": ["1.1"],
+				//		"Onsen": [
+				//			{
+				//				"OnsenName": ["積翠寺温泉"],
+				//				"OnsenNameKana": ["せきすいじおんせん"],
+				//				"OnsenID": ["1028"],
+				//				"OnsenAddress": ["山梨県甲府市上積翠寺町"],
+				//				"Area": [
+				//					{
+				//						"Region": ["甲信越"],
+				//						"Prefecture": ["山梨県"],
+				//						"LargeArea": ["甲府・湯村・昇仙峡"],
+				//						"SmallArea": ["甲府"]
+				//					}
+				//				],
+				//				"NatureOfOnsen": ["含鉄泉"],
+				//				"OnsenAreaID": ["50148"]
+				//			}, {
+				//				"OnsenName": ["甲府湯村温泉"],
+				//				"OnsenNameKana": ["こうふゆむらおんせん"],
+				//				"OnsenID": ["1029"],
+				//				"OnsenAddress": ["山梨県甲府市湯村"],
+				//				"Area": [
+				//					{
+				//						"Region": ["甲信越"],
+				//						"Prefecture": ["山梨県"],
+				//						"LargeArea": ["甲府・湯村・昇仙峡"],
+				//						"SmallArea": ["甲府"]
+				//					}
+				//				],
+				//				"NatureOfOnsen": ["単純温泉", "硫黄泉", "硫酸塩泉"],
+				//				"OnsenAreaID": ["50149"]
+				//			}, {
+				//				"OnsenName": ["甲府温泉"],
+				//				"OnsenNameKana": ["こうふおんせん"],
+				//				"OnsenID": ["1030"],
+				//				"OnsenAddress": ["山梨県甲府市丸ノ内"],
+				//				"Area": [
+				//					{
+				//						"Region": ["甲信越"],
+				//						"Prefecture": ["山梨県"],
+				//						"LargeArea": ["甲府・湯村・昇仙峡"],
+				//						"SmallArea": ["甲府"]
+				//					}
+				//				],
+				//				"NatureOfOnsen": ["塩化物泉"],
+				//				"OnsenAreaID": ["50150"]
+				//			}, {
+				//				"OnsenName": ["神の湯温泉"],
+				//				"OnsenNameKana": ["かみのゆおんせん"],
+				//				"OnsenID": ["1031"],
+				//				"OnsenAddress": ["山梨県北巨摩郡双葉町竜地"],
+				//				"Area": [
+				//					{
+				//						"Region": ["甲信越"],
+				//						"Prefecture": ["山梨県"],
+				//						"LargeArea": ["甲府・湯村・昇仙峡"],
+				//						"SmallArea": ["甲府"]
+				//					}
+				//				],
+				//				"NatureOfOnsen": ["塩化物泉"],
+				//				"OnsenAreaID": ["50151"]
+				//			}, {
+				//				"OnsenName": ["竜王ラドン温泉"],
+				//				"OnsenNameKana": ["りゅうおうらどんおんせん"],
+				//				"OnsenID": ["1060"],
+				//				"OnsenAddress": ["山梨県中巨摩郡竜王町富竹新田"],
+				//				"Area": [
+				//					{
+				//						"Region": ["甲信越"],
+				//						"Prefecture": ["山梨県"],
+				//						"LargeArea": ["甲府・湯村・昇仙峡"],
+				//						"SmallArea": ["甲府"]
+				//					}
+				//				],
+				//				"NatureOfOnsen": ["塩化物泉"],
+				//				"OnsenAreaID": ["50152"]
+				//			}
+				//		]
+				//	}
+				//};
 
 				let $table = document.querySelector('.js-table');
 
-				for (let i = 0; i < data.length; i++){
+				for (let i = 0; i < response.data.Results.Onsen.length; i++) {
 					let tr = document.createElement('tr');
 					$table.appendChild(tr);
-					for(let key in data[i]){
+
+					for(let key1 in response.data.Results.Onsen[i]){
 						let td = document.createElement('td');
-						//if(data[i][key] === 'url') {
-						//	td.innerHTML = `<a href="${data[i][key]}"></a>`;
-						//} else {
-							td.innerHTML = data[i][key];
-						//}
-						$table.appendChild(td);
+
+						if(key1 === 'OnsenNameKana') {
+							continue;
+						} else if(key1 === 'OnsenID') {
+							continue;
+						} else if(key1 === 'OnsenAreaID') {
+							continue;
+						} else if(key1 === 'Area') {
+							continue;
+						} else {
+							td.innerHTML = response.data.Results.Onsen[i][key1];
+							$table.appendChild(td);
+						}
 					}
 				}
 			})
